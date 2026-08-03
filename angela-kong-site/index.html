@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angela Kong — Stories are everywhere</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE6D6;
+    --paper-2:#E4DBC7;
+    --card:#FAF7EF;
+    --ink:#221D16;
+    --ink-soft:#5B5546;
+    --red:#C1443B;
+    --red-dark:#9C332C;
+    --teal:#4C6B63;
+    --rule: rgba(76,90,120,0.28);
+    --tape: rgba(237,230,214,0.75);
+    --shadow: 0 18px 40px rgba(34,29,22,0.18);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* paper grain */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    pointer-events:none;
+    opacity:0.5;
+    z-index:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/></svg>");
+  }
+
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  video{max-width:100%; display:block;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px; position:relative; z-index:1;}
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--red-dark);
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    color:var(--ink);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(237,230,214,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(34,29,22,0.12);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+  }
+  .logo{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    letter-spacing:0.04em;
+    font-size:15px;
+    text-decoration:none;
+    color:var(--ink);
+  }
+  .logo span{color:var(--red);}
+  .navlinks{
+    display:flex; gap:28px;
+    list-style:none; margin:0; padding:0;
+  }
+  .navlinks a{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:3px;
+    transition:border-color .2s, color .2s;
+  }
+  .navlinks a:hover{color:var(--red-dark); border-color:var(--red-dark);}
+  .navtoggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex; align-items:flex-end;
+    overflow:hidden;
+    color:#F7F2E6;
+  }
+  .hero img{
+    position:absolute; inset:0;
+    width:100%; height:100%; object-fit:cover;
+    object-position:50% 30%;
+    filter:saturate(0.75) contrast(0.95) brightness(0.55);
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(15,13,9,0.55) 0%, rgba(15,13,9,0.62) 45%, rgba(12,10,7,0.92) 100%);
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    padding:60px 32px 72px;
+    max-width:1180px;
+    margin:0 auto;
+    width:100%;
+  }
+  .hero .eyebrow{color:#E7B7AE; margin-bottom:18px; display:inline-block;}
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    line-height:1.04;
+    max-width:16ch;
+    color:#FBF6EA;
+    font-weight:600;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--red);
+    background:none;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:46ch;
+    font-size:1.08rem;
+    color:#E9E2D2;
+  }
+  .scroll-cue{
+    margin-top:44px;
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:#CFC6B2;
+  }
+  .scroll-cue .line{width:36px; height:1px; background:#CFC6B2; display:inline-block;}
+
+  /* ---------- SECTION SHELLS ---------- */
+  section{position:relative; z-index:1;}
+  .section-pad{padding:120px 0;}
+  .rule-top{border-top:1px solid var(--rule);}
+
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    gap:40px; flex-wrap:wrap;
+    margin-bottom:56px;
+  }
+  .section-head h2{
+    font-size:clamp(1.9rem, 3.4vw, 2.7rem);
+    max-width:14ch;
+  }
+  .section-num{
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    letter-spacing:0.08em;
+  }
+  .section-desc{
+    max-width:44ch;
+    color:var(--ink-soft);
+    font-size:1rem;
+  }
+
+  /* ---------- INTRO / ABOUT-STRIP ---------- */
+  .intro{
+    background:var(--paper-2);
+  }
+  .intro .wrap{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .intro p{
+    font-size:1.18rem;
+    color:var(--ink);
+    max-width:52ch;
+  }
+  .intro p + p{margin-top:18px; color:var(--ink-soft); font-size:1.02rem;}
+  .margin-note{
+    font-family:'Caveat', cursive;
+    font-size:1.9rem;
+    color:var(--red-dark);
+    transform:rotate(-2.4deg);
+    line-height:1.25;
+    position:relative;
+    padding-top:6px;
+  }
+  .margin-note::before{
+    content:"“";
+    font-family:'Fraunces', serif;
+    font-style:italic;
+  }
+
+  /* ---------- TAPED CARD (signature element) ---------- */
+  .taped{
+    position:relative;
+    background:var(--card);
+    padding:14px 14px 40px;
+    box-shadow:var(--shadow);
+    border-radius:2px;
+  }
+  .taped::before{
+    content:"";
+    position:absolute; top:-14px; left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    width:92px; height:26px;
+    background:var(--tape);
+    border:1px solid rgba(34,29,22,0.06);
+    box-shadow:0 3px 6px rgba(34,29,22,0.12);
+  }
+  .taped img, .taped video{width:100%; height:100%; object-fit:cover; display:block;}
+  .taped .cap{
+    position:absolute; left:14px; right:14px; bottom:12px;
+    font-family:'Space Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+    display:flex; justify-content:space-between;
+  }
+  .rot-l{transform:rotate(-2.2deg);}
+  .rot-r{transform:rotate(1.8deg);}
+  .rot-l2{transform:rotate(-1deg);}
+  .rot-r2{transform:rotate(2.6deg);}
+
+  /* ---------- CONFESSIONS ---------- */
+  .confessions{background:var(--ink); color:#EFE9DA;}
+  .confessions .eyebrow{color:#E7B7AE;}
+  .confessions .section-desc{color:#C9C1AC;}
+  .confessions .section-num{color:#8b8471;}
+
+  .call-strip{
+    display:flex; align-items:center; gap:18px;
+    flex-wrap:wrap;
+    background:rgba(247,242,230,0.06);
+    border:1px dashed rgba(247,242,230,0.28);
+    padding:22px 26px;
+    margin-bottom:56px;
+  }
+  .call-strip .num{
+    font-family:'Space Mono', monospace;
+    font-size:clamp(1.3rem, 3vw, 1.9rem);
+    color:#F7F2E6;
+    letter-spacing:0.02em;
+  }
+  .call-strip .num .ring{color:var(--red); font-weight:700;}
+  .call-strip .desc{color:#C9C1AC; font-size:0.95rem; max-width:48ch;}
+
+  .confess-grid{
+    display:grid;
+    grid-template-columns: 0.9fr 1fr 1fr 1fr;
+    gap:26px;
+    align-items:start;
+  }
+  .confess-grid-3{
+    grid-template-columns: 0.85fr 1fr 1fr;
+  }
+  .flyer-card img{border-radius:2px;}
+  .vm-video{aspect-ratio:9/16; max-height:520px;}
+  .vm-video video{width:100%; height:100%; object-fit:cover;}
+
+  /* ---------- INTERVIEWS ---------- */
+  .interviews{background:var(--paper);}
+  .interview-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:34px 28px;
+  }
+  .interview-grid .taped{aspect-ratio:3/4;}
+  .interview-grid .taped img{height:100%;}
+  @media (min-width: 900px){
+    .interview-grid > *:nth-child(2){margin-top:34px;}
+    .interview-grid > *:nth-child(4){margin-top:-18px;}
+  }
+
+  /* ---------- POSTERS IN THE PARK ---------- */
+  .posters{background:var(--paper-2);}
+  .poster-bento{
+    display:grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows:auto auto;
+    gap:28px;
+  }
+  .poster-bento .wide{grid-column:1 / 2; grid-row:1 / 3;}
+  .poster-bento .wide .taped{aspect-ratio:4/3;}
+  .poster-bento .wide .taped img{height:100%;}
+  .poster-bento .note .taped{aspect-ratio:3/4;}
+  .poster-bento .note .taped img{height:100%;}
+  .poster-videos{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  .poster-videos .taped{aspect-ratio:4/3;}
+  .poster-videos video{height:100%;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .intro .wrap{grid-template-columns:1fr;}
+    .confess-grid{grid-template-columns:1fr 1fr;}
+    .interview-grid{grid-template-columns:1fr 1fr;}
+    .interview-grid > *{margin-top:0 !important;}
+    .poster-bento{grid-template-columns:1fr;}
+    .poster-bento .wide{grid-column:1; grid-row:auto;}
+    .poster-videos{grid-template-columns:1fr;}
+  }
+  @media (max-width: 640px){
+    .navlinks{display:none;}
+    .section-pad{padding:80px 0;}
+    .confess-grid{grid-template-columns:1fr;}
+    .interview-grid{grid-template-columns:1fr;}
+    .call-strip{flex-direction:column; align-items:flex-start;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+
+  :focus-visible{outline:2px solid var(--red-dark); outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo">ANGELA <span>KONG</span></a>
+    <ul class="navlinks">
+      <li><a href="#confessions">Confessions</a></li>
+      <li><a href="#interviews">Interviews</a></li>
+      <li><a href="#posters">Posters</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img src="images/poster_hero.jpg" alt="A hand-lettered public poster reading 'Who have you disappointed?' set up in a San Francisco park, with clipboards inviting passersby to write a response.">
+  <div class="hero-content">
+    <span class="eyebrow">A documentary project — San Francisco</span>
+    <h1>Stories are everywhere, <em>if you know how to look.</em></h1>
+    <p class="lede">Angela Kong makes short documentaries out of ordinary lives — anonymous voicemails, sidewalk interviews, and handwritten confessions left in public parks.</p>
+  </div>
+</header>
+
+<section class="confessions section-pad" id="confessions">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">01 / Portfolio</span>
+        <h2 style="margin-top:10px;">Anonymous Confessions Project</h2>
+      </div>
+      <p class="section-desc">Strangers leave me an anonymous confession in the form of a voicemail.</p>
+    </div>
+
+    <div class="call-strip">
+      <div class="num">(408) 758-1225 <span class="ring">— leave a message, anytime</span></div>
+      <div class="desc">Every flyer goes up with the same offer: tell me how your day's going, what's going well, who you're thinking about. The secret to the universe, if you've got it.</div>
+    </div>
+
+    <div class="confess-grid confess-grid-3">
+      <div class="flyer-card taped rot-l">
+        <img src="images/confession_poster.jpg" alt="The Anonymous Confessions Box flyer, taped to a utility pole on a San Francisco street, with a phone number for leaving anonymous voicemails.">
+        <div class="cap"><span>FLYER</span><span>SF, 2026</span></div>
+      </div>
+
+      <div class="vm-video taped rot-r">
+        <video src="images/confession_1.mp4" controls playsinline preload="metadata" aria-label="Anonymous voicemail confession about a relationship"></video>
+        <div class="cap"><span>CONFESSION — 01</span><span>voicemail</span></div>
+      </div>
+
+      <div class="vm-video taped rot-l2">
+        <video src="images/confession_2.mp4" controls playsinline preload="metadata" aria-label="Anonymous voicemail confession about not having had a deep friendship in ten years"></video>
+        <div class="cap"><span>CONFESSION — 02</span><span>voicemail</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="interviews section-pad rule-top" id="interviews">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">02 / Portfolio</span>
+        <h2 style="margin-top:10px;">Street Interviews</h2>
+      </div>
+      <p class="section-desc">I get to know strangers and make short films from their lives, such as the greatest challenge they've overcome, a dream they've given up on, their greatest love, etc. My topics focus on friendship, adversity, and vulnerability.</p>
+    </div>
+
+    <div class="interview-grid">
+      <div class="taped rot-l">
+        <img src="images/interview_1.jpg" alt="Portrait of a man laughing under a tree in a San Francisco park during a street interview.">
+        <div class="cap"><span>NO. 01</span><span>SF, 2026</span></div>
+      </div>
+      <div class="taped rot-r">
+        <img src="images/interview_2.jpg" alt="Portrait of a man resting on a park bench with a coffee cup beside him, mid-conversation for a street interview.">
+        <div class="cap"><span>NO. 02</span><span>SF, 2026</span></div>
+      </div>
+      <div class="taped rot-l2">
+        <img src="images/interview_3.jpg" alt="Portrait of a woman sitting on stone steps and smiling during a street interview, blue sky behind her.">
+        <div class="cap"><span>NO. 03</span><span>SF, 2026</span></div>
+      </div>
+      <div class="taped rot-r2">
+        <img src="images/interview_4.jpg" alt="Portrait of a woman sitting under a palm tree on a residential street during a street interview.">
+        <div class="cap"><span>NO. 04</span><span>SF, 2026</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="posters section-pad rule-top" id="posters">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">03 / Portfolio</span>
+        <h2 style="margin-top:10px;">Posters in the Park</h2>
+      </div>
+      <p class="section-desc">A place for strangers to reflect on their life through the written word & learn about their neighbor's stories.</p>
+    </div>
+
+    <div class="poster-bento">
+      <div class="wide">
+        <div class="taped rot-l">
+          <img src="images/poster_wide.jpg" alt="Wide view of the 'Who have you disappointed?' poster installation set up in a park beneath a statue, with people reading and writing responses.">
+          <div class="cap"><span>INSTALLATION</span><span>SF, 2026</span></div>
+        </div>
+      </div>
+      <div class="note">
+        <div class="taped rot-r">
+          <img src="images/poster_note_1.jpg" alt="A handwritten response taped to the poster, reflecting on the writer's relationship with their father.">
+          <div class="cap"><span>RESPONSE</span><span>hand-written</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="poster-videos">
+      <div class="taped rot-l2">
+        <video src="images/disappointed_note_1.mp4" controls playsinline preload="metadata" aria-label="Video of a handwritten confession responding to the question who have you disappointed"></video>
+        <div class="cap"><span>VIDEO</span><span>a written response</span></div>
+      </div>
+      <div class="taped rot-r2">
+        <video src="images/disappointed_board.mp4" controls playsinline preload="metadata" aria-label="Video of the full poster board installation asking who have you disappointed, set up on a sidewalk with clipboards"></video>
+        <div class="cap"><span>VIDEO</span><span>the board, in place</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
